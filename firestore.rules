@@ -1,0 +1,92 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Only people signed in with a verified IITGN email can save or change anything.
+    // To allow a different domain, change the pattern below (dots written as [.]).
+    function isMember() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email.lower().matches('.*@iitgn[.]ac[.]in');
+    }
+
+    // Admin email(s), in lowercase. Must be IITGN addresses, same as in config.js.
+    function adminEmails() {
+      return ['bibhu.sahoo@iitgn.ac.in'];
+    }
+
+    function isAdmin() {
+      return isMember() && request.auth.token.email.lower() in adminEmails();
+    }
+
+    function shortString(d, key, max) {
+      return d.get(key, '') is string && d.get(key, '').size() <= max;
+    }
+
+    function validPosition(d) {
+      return d.keys().hasOnly(['title', 'host', 'level', 'field', 'eligibility', 'funding',
+                               'window', 'notes', 'url', 'deadlineType', 'deadline', 'estimated',
+                               'tags', 'source', 'addedBy', 'addedByName', 'createdAt',
+                               'updatedBy', 'updatedByName', 'updatedAt'])
+        && d.keys().hasAll(['title', 'host', 'field', 'deadlineType', 'url', 'tags', 'source', 'createdAt'])
+        && d.title is string && d.title.size() > 0 && d.title.size() <= 200
+        && d.host is string && d.host.size() > 0 && d.host.size() <= 120
+        && d.field in ['Bio', 'Eng', 'Both']
+        && d.deadlineType in ['fixed', 'rolling', 'varies']
+        && d.url is string && d.url.size() <= 500
+        && (d.url == '' || d.url.matches('https?://.+'))
+        && d.tags is list && d.tags.size() <= 8
+        && d.get('estimated', false) is bool
+        && d.source in ['starter', 'community']
+        && d.createdAt is string
+        && shortString(d, 'level', 160)
+        && shortString(d, 'deadline', 10)
+        && shortString(d, 'eligibility', 1000)
+        && shortString(d, 'funding', 1000)
+        && shortString(d, 'window', 300)
+        && shortString(d, 'notes', 1500)
+        && shortString(d, 'addedByName', 80)
+        && shortString(d, 'updatedByName', 80);
+    }
+
+    // Shared positions: anyone can read; IITGN members can add and edit;
+    // only the person who added a position (or an admin) can delete it.
+    match /positions/{positionId} {
+      allow read: if true;
+
+      allow create: if validPosition(request.resource.data)
+        && (
+          (request.resource.data.source == 'community'
+            && isMember()
+            && request.resource.data.addedBy == request.auth.uid)
+          || (request.resource.data.source == 'starter' && isAdmin())
+        );
+
+      allow update: if isMember()
+        && validPosition(request.resource.data)
+        && request.resource.data.source == resource.data.source
+        && request.resource.data.get('addedBy', null) == resource.data.get('addedBy', null)
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.get('updatedBy', '') == request.auth.uid;
+
+      allow delete: if isMember()
+        && (resource.data.get('addedBy', null) == request.auth.uid || isAdmin());
+    }
+
+    // Each person's settings and wishlist: private to that person.
+    match /users/{userId} {
+      allow read: if isMember() && request.auth.uid == userId;
+      allow write: if isMember() && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly(['remindDays']);
+
+      match /wishlist/{positionId} {
+        allow read, delete: if isMember() && request.auth.uid == userId;
+        allow create, update: if isMember() && request.auth.uid == userId
+          && request.resource.data.keys().hasOnly(['status', 'note', 'savedAt'])
+          && request.resource.data.get('note', '') is string
+          && request.resource.data.get('note', '').size() <= 2000;
+      }
+    }
+  }
+}
