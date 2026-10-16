@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Open calls: bio &amp; engineering scholarships and PhD positions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --paper:#F1F5F3; --surface:#FFFFFF; --ink:#15302E; --muted:#5A6D69; --line:#D2DCD7;
+  --violet:#5B3FA3; --violet-soft:#ECE6F8; --on-violet:#FFFFFF;
+  --safranin:#B3304E; --safranin-soft:#FAE4EA;
+  --moss:#2B6B52; --moss-soft:#E0EFE8;
+  --backdrop:rgba(12,28,26,.45);
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --text:"Public Sans","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F1716; --surface:#16201F; --ink:#E1EBE7; --muted:#97A9A4; --line:#2A3835;
+    --violet:#B6A0F2; --violet-soft:#272040; --on-violet:#17122B;
+    --safranin:#F08DA3; --safranin-soft:#3B1D26;
+    --moss:#7DCBA7; --moss-soft:#163028;
+    --backdrop:rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F1716; --surface:#16201F; --ink:#E1EBE7; --muted:#97A9A4; --line:#2A3835;
+  --violet:#B6A0F2; --violet-soft:#272040; --on-violet:#17122B;
+  --safranin:#F08DA3; --safranin-soft:#3B1D26;
+  --moss:#7DCBA7; --moss-soft:#163028;
+  --backdrop:rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+[hidden]{display:none!important}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.55 var(--text);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+img,svg{max-width:100%}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+
+/* Masthead */
+.masthead{padding:40px 0 22px}
+.mast{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between}
+.mast > div{flex:1 1 520px}
+.mast > .account{flex:none;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.who{font-size:14px;color:var(--muted)}
+.who strong{color:var(--ink);font-weight:600}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,5.4vw,3.4rem);line-height:1.02;letter-spacing:-.025em;margin:0 0 12px;font-variation-settings:"opsz" 96}
+.lede{margin:0;max-width:60ch;color:var(--muted);font-size:16px}
+
+/* Reminders */
+.remind{margin-top:22px}
+.remind-in{background:var(--violet-soft);border:1px solid var(--violet);border-radius:14px;padding:16px 18px}
+.rem-head{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;justify-content:space-between}
+.rem-head h2{margin:0;font:600 19px/1.25 var(--display);letter-spacing:-.01em}
+.rem-set{font-size:14px;color:var(--ink);display:flex;align-items:center;gap:8px}
+.rem-set select{height:32px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:400 14px var(--text);padding:0 8px}
+.rem-list{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px}
+.rem-list li{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+.rem-list .title-btn{font-weight:600}
+.rem-cal{margin-left:auto;font-size:13.5px}
+.rem-empty{margin:10px 0 0;font-size:14.5px}
+.rem-foot{margin:10px 0 0;font-size:13px;color:var(--muted);max-width:80ch}
+.cal-link{color:var(--violet);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:8px 14px;font:600 14px/1.2 var(--text);cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--violet);border-color:var(--violet);color:var(--on-violet)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.danger{color:var(--safranin)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+
+/* Timeline */
+.band{background:var(--surface);border-block:1px solid var(--line);padding:20px 0 14px}
+.tl-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 20px;margin-bottom:6px}
+.tl-head h2{font:600 19px/1.3 var(--display);margin:0;letter-spacing:-.01em}
+.tl-head p{margin:0;color:var(--muted);font-size:14px}
+.tl-scroll{overflow-x:auto;overflow-y:hidden;margin:0 -6px}
+.timeline{position:relative;height:160px;min-width:640px}
+.tl-track{position:absolute;left:18px;right:18px;top:0;bottom:0}
+.tl-axis{position:absolute;left:0;right:0;bottom:24px;height:2px;background:var(--line)}
+.tl-month{position:absolute;top:18px;bottom:24px;border-left:1px dashed var(--line)}
+.tl-month span{position:absolute;bottom:-22px;left:4px;font-size:12.5px;color:var(--muted);white-space:nowrap}
+.tl-today{position:absolute;left:0;top:18px;bottom:24px;border-left:2px solid var(--ink)}
+.tl-today span{position:absolute;top:-18px;left:-1px;font:600 12.5px var(--text);white-space:nowrap}
+.tl-dot{position:absolute;width:13px;height:13px;margin:0;padding:0;border-radius:50%;border:2px solid var(--violet);background:var(--surface);transform:translateX(-50%);cursor:pointer}
+.tl-dot.saved{background:var(--violet)}
+.tl-dot.soon{border-color:var(--safranin)}
+.tl-dot.soon.saved{background:var(--safranin)}
+.tl-dot:hover{box-shadow:0 0 0 3px var(--violet-soft)}
+.tl-more{position:absolute;font-size:12px;color:var(--muted);transform:translateX(-50%)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:13px;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;border:2px solid var(--violet);vertical-align:-1px;margin-right:6px}
+.legend i.f{background:var(--violet)}
+.legend i.s{border-color:var(--safranin);background:var(--safranin)}
+
+/* Toolbar */
+.toolbar{background:var(--paper);border-bottom:1px solid var(--line);padding:12px 0;z-index:5}
+@media (min-width:760px){
+  .toolbar{position:sticky;top:env(safe-area-inset-top,0px)}
+  html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 110px)}
+}
+.tb{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}
+.tabs{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
+.tab{border:0;background:transparent;border-radius:999px;padding:6px 14px;font:600 14px/1.2 var(--text);color:var(--muted);cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.tab .n{font-family:var(--display);font-weight:500;margin-left:6px}
+.field{height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);padding:0 10px;font:400 14px var(--text);max-width:100%}
+.search{flex:1 1 220px;min-width:160px}
+
+/* List */
+main{padding-bottom:40px}
+.count{color:var(--muted);font-size:14px;margin:16px 0 8px}
+.sync-note{font-size:13.5px;color:var(--muted);margin:14px 0 0}
+.wish-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.list{list-style:none;margin:0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.row{display:grid;grid-template-columns:84px minmax(0,1fr) auto;gap:4px 18px;padding:16px 18px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.when{display:flex;flex-direction:column;align-items:flex-start;line-height:1;padding-top:2px}
+.when-day{font:600 34px/1 var(--display);letter-spacing:-.02em;font-variation-settings:"opsz" 72}
+.when-month{font-size:13px;color:var(--muted);margin-top:5px}
+.when-est{font-size:12px;color:var(--muted);font-style:italic;margin-top:3px}
+.when-word{font:600 18px/1.1 var(--display);margin-top:6px}
+.when.soon .when-day{color:var(--safranin)}
+.when.passed .when-day{color:var(--muted)}
+.when.rolling .when-word{color:var(--moss)}
+.when.varies .when-word{color:var(--muted)}
+.main h3{margin:0;font:600 17.5px/1.3 var(--display);letter-spacing:-.005em}
+.title-btn{all:unset;cursor:pointer;border-radius:4px}
+.title-btn:hover{text-decoration:underline;text-underline-offset:3px}
+.title-btn:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin-top:7px;font-size:14px;color:var(--muted)}
+.chip{font-size:12.5px;line-height:1.4;padding:2px 8px;border-radius:6px;background:var(--paper);border:1px solid var(--line);color:var(--ink)}
+.tagchip{font:500 12.5px/1.4 var(--text);padding:2px 9px;border-radius:999px;background:transparent;border:1px solid var(--moss);color:var(--moss);cursor:pointer}
+.tagchip:hover{background:var(--moss-soft)}
+.tagchip[aria-pressed="true"]{background:var(--moss);color:var(--surface)}
+.pill{font-size:13px;font-weight:600;line-height:1.4;padding:2px 10px;border-radius:999px;white-space:nowrap}
+.pill.soon{background:var(--safranin-soft);color:var(--safranin)}
+.pill.month,.pill.later{background:var(--violet-soft);color:var(--violet)}
+.pill.rolling,.pill.varies{background:var(--moss-soft);color:var(--moss)}
+.pill.passed{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.mine-chip{font-size:13px;color:var(--violet);font-weight:600}
+.fund{margin:7px 0 0;font-size:14px;max-width:72ch;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.actions{display:flex;gap:6px;align-items:flex-start}
+.save{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 13px;font:600 13px/1.2 var(--text);cursor:pointer;white-space:nowrap}
+.save:hover{border-color:var(--violet)}
+.save[aria-pressed="true"]{background:var(--violet);border-color:var(--violet);color:var(--on-violet)}
+.save[aria-pressed="true"] svg path{fill:currentColor}
+.save:disabled{opacity:.5;cursor:not-allowed}
+.save svg{display:block}
+.details{grid-column:2 / -1;margin-top:12px;border-top:1px dashed var(--line);padding-top:12px}
+.facts{margin:0;display:grid;gap:10px}
+.facts div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px}
+.facts dt{color:var(--muted);font-size:13.5px}
+.facts dd{margin:0;font-size:14.5px;max-width:72ch}
+.detail-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center}
+.cal-inline{font-size:13.5px;color:var(--muted)}
+.mine{margin-top:14px;border:1px solid var(--violet);border-radius:12px;padding:12px 14px;background:var(--violet-soft);display:grid;gap:6px;max-width:640px}
+.mine-title{margin:0 0 2px;font-weight:600;font-size:14px;color:var(--violet)}
+.mine label{font-size:13px;color:var(--muted)}
+.mine select,.mine textarea{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:400 14px/1.45 var(--text);padding:7px 9px}
+.mine textarea{resize:vertical}
+.prov{margin:12px 0 0;font-size:13px;color:var(--muted)}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:14px;padding:28px 22px;color:var(--muted);text-align:center}
+.empty strong{display:block;color:var(--ink);font:600 17px var(--display);margin-bottom:4px}
+.hidden-note{margin:12px 0 0;font-size:14px;color:var(--muted)}
+.linkish{all:unset;color:var(--violet);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.linkish:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+.notice{margin:16px 0;padding:12px 14px;border-radius:10px;background:var(--safranin-soft);color:var(--ink);font-size:14px}
+footer{color:var(--muted);font-size:13px;padding:0 0 32px}
+footer p{max-width:80ch;margin:0}
+@keyframes flash{from{background:var(--violet-soft)}to{background:transparent}}
+.flash{animation:flash 1.8s ease-out}
+@media (prefers-reduced-motion:reduce){.flash{animation:none;outline:2px solid var(--violet);outline-offset:-2px}}
+
+/* Dialog */
+dialog{border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);padding:0;width:min(700px,calc(100vw - 24px));max-height:calc(100dvh - 32px)}
+dialog::backdrop{background:var(--backdrop)}
+.dlg{display:flex;flex-direction:column;max-height:calc(100dvh - 34px)}
+.dlg-head{padding:18px 20px 6px}
+.dlg-head h2{margin:0;font:600 22px/1.2 var(--display)}
+.dlg-head p{margin:4px 0 0;color:var(--muted);font-size:14px}
+.dlg-body{padding:10px 20px;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px 14px}
+.f{display:grid;gap:4px;align-content:start}
+.f.full{grid-column:1 / -1}
+.f label,.f .lbl{font-size:13px;font-weight:600}
+.f .hint{font-size:12.5px;color:var(--muted);font-weight:400}
+.f input[type=text],.f input[type=url],.f input[type=date],.f select,.f textarea{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);font:400 14.5px/1.4 var(--text);padding:8px 10px}
+.f textarea{resize:vertical;min-height:64px}
+.check{display:flex;gap:8px;align-items:center;font-size:14px}
+.tagpick{display:flex;flex-wrap:wrap;gap:6px}
+.tagpick label{display:inline-flex;align-items:center;gap:6px;font:500 13px/1.3 var(--text);border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer;background:var(--paper)}
+.tagpick input{margin:0;accent-color:var(--moss)}
+.tagpick label:has(input:checked){border-color:var(--moss);background:var(--moss-soft);color:var(--moss)}
+.dlg-err{grid-column:1 / -1;color:var(--safranin);font-size:14px;margin:0;min-height:1em}
+.dlg-foot{display:flex;justify-content:flex-end;gap:8px;padding:12px 20px 18px;border-top:1px solid var(--line)}
+
+/* Toast */
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:10px;font-size:14px;max-width:min(520px,calc(100vw - 32px));z-index:20;box-shadow:0 6px 24px rgba(0,0,0,.18)}
+
+@media (max-width:600px){
+  .masthead{padding-top:28px}
+  .row{grid-template-columns:58px minmax(0,1fr);padding:14px}
+  .when-day{font-size:27px}
+  .actions{grid-column:2}
+  .details{grid-column:1 / -1}
+  .facts div{grid-template-columns:1fr;gap:2px}
+  .dlg-body{grid-template-columns:1fr}
+  .rem-cal{margin-left:0}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap mast">
+    <div>
+      <h1>Open calls in bio &amp; engineering</h1>
+      <p class="lede">A shared board of scholarships, fellowships and funded PhD positions. Save the calls you plan to apply for, keep an eye on their deadlines, and add new ones for everyone to see.</p>
+    </div>
+    <div class="account" id="account"></div>
+  </div>
+  <div class="wrap"><div id="setup" class="notice" hidden></div></div>
+  <section id="remind" class="wrap remind" aria-labelledby="remTitle" hidden></section>
+</header>
+
+<section class="band" aria-labelledby="tlTitle">
+  <div class="wrap">
+    <div class="tl-head">
+      <h2 id="tlTitle">Deadlines in the next four months</h2>
+      <p id="tlSummary">Loading deadlines…</p>
+    </div>
+    <div class="tl-scroll"><div id="timeline" class="timeline"></div></div>
+    <div class="legend" aria-hidden="true">
+      <span><i class="f"></i>On your wishlist</span>
+      <span><i></i>Not saved</span>
+      <span><i class="s"></i>Closes within 14 days</span>
+    </div>
+  </div>
+</section>
+
+<div class="toolbar">
+  <div class="wrap tb">
+    <div class="tabs" role="group" aria-label="Which positions to show">
+      <button class="tab" id="tabAll" type="button" aria-pressed="true">All positions<span class="n" id="nAll"></span></button>
+      <button class="tab" id="tabWish" type="button" aria-pressed="false">My wishlist<span class="n" id="nWish"></span></button>
+    </div>
+    <label class="vh" for="q">Search positions</label>
+    <input id="q" class="field search" type="search" placeholder="Search by name, country, domain…" autocomplete="off">
+    <select id="fField" class="field" aria-label="Field">
+      <option value="any">Any field</option>
+      <option value="Bio">Biological sciences</option>
+      <option value="Eng">Engineering</option>
+    </select>
+    <select id="fTag" class="field" aria-label="Domain">
+      <option value="any">Any domain</option>
+    </select>
+    <select id="fLevel" class="field" aria-label="Level">
+      <option value="any">Any level</option>
+      <option value="phd">PhD</option>
+      <option value="masters">Master's</option>
+    </select>
+    <select id="fStatus" class="field" aria-label="Deadline status">
+      <option value="active">Upcoming &amp; rolling</option>
+      <option value="soon">Closing within 30 days</option>
+      <option value="rolling">Rolling or dates vary</option>
+      <option value="passed">Passed (watch next cycle)</option>
+      <option value="all">Everything</option>
+    </select>
+    <select id="fSort" class="field" aria-label="Sort order">
+      <option value="deadline">Soonest deadline</option>
+      <option value="recent">Recently added</option>
+      <option value="az">A to Z</option>
+    </select>
+  </div>
+</div>
+
+<main class="wrap">
+  <div id="notice"></div>
+  <div id="wishBar" hidden>
+    <p class="sync-note">Your wishlist is saved to your account, so it stays after you reload and follows you to any device where you sign in. Only you can see it.</p>
+    <div class="wish-actions" id="wishActions"></div>
+  </div>
+  <p class="count" id="count" aria-live="polite"></p>
+  <ul id="list" class="list"></ul>
+  <div id="empty"></div>
+  <p id="hiddenNote" class="hidden-note" hidden></p>
+</main>
+
+<footer class="wrap">
+  <p>Starter entries come from a list compiled on 16 Oct 2026. Their deadlines are estimates based on past cycles, so confirm each one on the official site. Anyone signed in can correct an entry with Edit details. The first name of whoever adds or edits a position is shown with it.</p>
+</footer>
+
+<dialog id="dlg" aria-labelledby="dlgTitle">
+  <div class="dlg">
+    <div class="dlg-head">
+      <h2 id="dlgTitle">Add a position</h2>
+      <p>Everyone who visits this site will see it.</p>
+    </div>
+    <div class="dlg-body">
+      <div class="f full">
+        <label for="f-title">Program or position</label>
+        <input id="f-title" type="text" maxlength="200" placeholder="e.g., PhD in synthetic biology, Lab of Dr. Rivera">
+      </div>
+      <div class="f">
+        <label for="f-host">Host country or region</label>
+        <input id="f-host" type="text" maxlength="120" placeholder="e.g., Netherlands">
+      </div>
+      <div class="f">
+        <label for="f-level">Level</label>
+        <select id="f-level">
+          <option value="PhD">PhD</option>
+          <option value="Master's">Master's</option>
+          <option value="Master's & PhD">Master's &amp; PhD</option>
+          <option value="Postdoc or other">Postdoc or other</option>
+        </select>
+      </div>
+      <div class="f">
+        <label for="f-field">Field</label>
+        <select id="f-field">
+          <option value="Bio">Biological sciences</option>
+          <option value="Eng">Engineering</option>
+          <option value="Both">Both</option>
+        </select>
+      </div>
+      <div class="f">
+        <label for="f-dtype">Deadline</label>
+        <select id="f-dtype">
+          <option value="fixed">A fixed date</option>
+          <option value="rolling">Rolling (apply anytime)</option>
+          <option value="varies">Varies or not announced yet</option>
+        </select>
+      </div>
+      <div class="f" id="dateWrap">
+        <label for="f-date">Deadline date</label>
+        <input id="f-date" type="date">
+      </div>
+      <div class="f" id="estWrap">
+        <span class="lbl">Confirmed?</span>
+        <label class="check"><input id="f-est" type="checkbox"> This date is an estimate</label>
+      </div>
+      <div class="f full">
+        <span class="lbl" id="tagLbl">Domains <span class="hint">(pick up to 8)</span></span>
+        <div class="tagpick" id="tagPick" role="group" aria-labelledby="tagLbl"></div>
+        <label for="f-tags-other" style="margin-top:6px">Other domains <span class="hint">(comma-separated)</span></label>
+        <input id="f-tags-other" type="text" maxlength="200" placeholder="e.g., Marine biology, Tissue engineering">
+      </div>
+      <div class="f full">
+        <label for="f-url">Official link</label>
+        <input id="f-url" type="url" maxlength="500" placeholder="https://">
+      </div>
+      <div class="f full">
+        <label for="f-elig">Who can apply <span class="hint">(nationality, degree, career stage)</span></label>
+        <textarea id="f-elig" maxlength="1000" rows="2"></textarea>
+      </div>
+      <div class="f full">
+        <label for="f-fund">Funding</label>
+        <textarea id="f-fund" maxlength="1000" rows="2" placeholder="e.g., Full tuition + monthly stipend for 4 years"></textarea>
+      </div>
+      <div class="f full">
+        <label for="f-window">Application window</label>
+        <input id="f-window" type="text" maxlength="300" placeholder="e.g., Opens Sept, closes early Dec">
+      </div>
+      <div class="f full">
+        <label for="f-notes">Notes</label>
+        <textarea id="f-notes" maxlength="1500" rows="2" placeholder="Anything that helps others apply"></textarea>
+      </div>
+      <p class="dlg-err" id="dlgErr" role="alert"></p>
+    </div>
+    <div class="dlg-foot">
+      <button class="btn" type="button" id="dlgCancel">Cancel</button>
+      <button class="btn primary" type="button" id="dlgSave">Add position</button>
+    </div>
+  </div>
+</dialog>
+
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
